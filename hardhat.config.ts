@@ -17,7 +17,7 @@ const config: HardhatUserConfig = {
   networks: {
     etherdata: {
       url: "https://rpc1.taurus.axiomesh.io/",
-      accounts: process.env.HangSeng_PK !== undefined ? [process.env.HangSeng_PK] : [],
+      accounts: process.env.TEST_BORROWER_PK !== undefined ? [process.env.TEST_BORROWER_PK] : [],
     },
   },
 };
