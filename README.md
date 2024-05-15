@@ -23,7 +23,7 @@ You can see the mint address of DLT and HKDC from the terminal output. Put them 
 yarn deploy # make sure you have put DLT and HKDC mint addresses in .env file correctly
 ```
 
-## Before Test Setup
+## Before-Test Setup
 ```shell
 yarn setup_test
 ```
