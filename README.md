@@ -35,3 +35,7 @@ You should see "DLend contract minted 2,000,000 DLT. Test accounts get 1000000 H
 yarn test
 ```
 You can create your own test by modifying the existing test and replace the function signature used by the contract.
+
+## Test Result
+<img width="392" alt="image" src="https://github.com/Josh-Kwong-HKUST/DLend/assets/125365120/b3b845e6-e5dd-40aa-9d1a-d47584bcc735">
+Note that test 2 may fail if you start running the test right after test setup. You may need to wait for a while or run the test for a few more times.
