@@ -34,10 +34,15 @@ describe("Test getSpecificPendingLoan & offerLoan", function () {
     let rep = await contract.getSpecificPendingLoan(process.env.TEST_BORROWER_ADDR!, process.env.TEST_LENDER_ADDR!);
     let amount = rep.split(",")[0];
     console.log("Amount: ", amount);
-    hkdcContract.approve(process.env.CONTRACT_ADDR!, Number(amount)).then(async () => {
-      let tx = await contract.offerLoan(process.env.TEST_BORROWER_ADDR!);
-      await tx.wait();
-    })
-    
+    const run = async () => {
+      let res = await hkdcContract.approve(process.env.CONTRACT_ADDR!, Number(amount));
+      if (res){
+        console.log("Approved successfully");
+        let tx = await contract.offerLoan(process.env.TEST_BORROWER_ADDR!);
+        await tx.wait();
+        console.log("Loan offered successfully");
+      }
+    } 
+    await run();
   });
 })

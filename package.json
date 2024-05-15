@@ -16,6 +16,7 @@
     "deploy": "npx hardhat run scripts/deploy_contract.ts --network etherdata",
     "deploy_hkdc": "npx hardhat run scripts/deploy_hkdc.ts --network etherdata",
     "deploy_dlt": "npx hardhat run scripts/deploy_dlt.ts --network etherdata",
+    "setup_test": "npx hardhat run scripts/setup_test.ts --network hardhat",
     "test": "npx hardhat test"
     
   }

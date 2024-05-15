@@ -51,7 +51,11 @@ contract LoanPlatform {
         if(pendingLoanRequests[borrower][msg.sender].amount <= 0)   revert("You have no pending loan request from this borrower!");
         if(!hkdcToken.transferFrom(msg.sender, borrower, pendingLoanRequests[borrower][msg.sender].amount))   revert("Failed to offer a loan. Please check if you have enough balance");
         if(!dltToken.transfer(borrower, pendingLoanRequests[borrower][msg.sender].amount / 10))   revert("Failed to reward the borrower.");
-        settledLoans[borrower][msg.sender] = pendingLoanRequests[borrower][msg.sender];
+        settledLoans[borrower][msg.sender].amount = pendingLoanRequests[borrower][msg.sender].amount;
+        settledLoans[borrower][msg.sender].from = pendingLoanRequests[borrower][msg.sender].from;
+        settledLoans[borrower][msg.sender].to = pendingLoanRequests[borrower][msg.sender].to;
+        settledLoans[borrower][msg.sender].dueDate = pendingLoanRequests[borrower][msg.sender].dueDate;
+        settledLoans[borrower][msg.sender].isPaid = false;
         pendingLoanRequests[borrower][msg.sender].amount = 0;
         emit LoanRequestAccepted(borrower,
                                  msg.sender,
@@ -144,7 +148,11 @@ contract LoanPlatform {
         if(!hkdcToken.transferFrom(msg.sender, lender, settledLoans[msg.sender][lender].amount))   revert("Failed to pay the loan. Please check if you have enough balance");
         if(!dltToken.transfer(lender, settledLoans[msg.sender][lender].amount * 9 / 10))   revert("Failed to reward the lender.");
         settledLoans[msg.sender][lender].isPaid = true;
-        pastLoans[msg.sender].push(settledLoans[msg.sender][lender]);
+        pastLoans[msg.sender].push(Loan(settledLoans[msg.sender][lender].amount,
+                                        settledLoans[msg.sender][lender].from,
+                                        settledLoans[msg.sender][lender].to,
+                                        settledLoans[msg.sender][lender].dueDate,
+                                        true));
         emit LoanPaid(msg.sender,
                 lender,
                 settledLoans[msg.sender][lender].amount,
