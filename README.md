@@ -3,6 +3,9 @@
 ## Node JS Runtime
 16.19.0
 
+## Solidity Compiler Version
+0.8.24
+
 ## Install Dependencies
 ```shell
 yarn
